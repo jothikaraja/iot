@@ -24,12 +24,13 @@ def get_sensor_value_from_pin(pin):
         return -999
 
 
-sensor_value=get_sensor_value_from_pin("A0")
+
 
 threshold=500
 
 mybolt = Bolt(conf.API_KEY, conf.DEVICE_ID)
 while True:
+    sensor_value=get_sensor_value_from_pin("A0")
     if sensor_value < threshold:
         print("dark")
         response = mybolt.digitalWrite('0', 'HIGH')

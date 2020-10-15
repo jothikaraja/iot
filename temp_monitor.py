@@ -24,16 +24,18 @@ def get_sensor_value_from_pin(pin):
         return -999
 
 
-sensor_value=get_sensor_value_from_pin("A0")
-Temperature=(100*sensor_value)/1024 
-threshold=700
+
 
 mybolt = Bolt(conf.API_KEY, conf.DEVICE_ID)
 while True:
+    sensor_value=get_sensor_value_from_pin("A0")
+    Temperature=(100*sensor_value)/1024
+    threshold=800
+    print(Temperature)
     if Temperature > threshold:
         response = mybolt.digitalWrite('1', 'HIGH')
         print (response)
         c=input('notice the temperature')
-        response = mybolt.digitalWrite('0', 'LOW')
+        response = mybolt.digitalWrite('1', 'LOW')
         print(response)
     time.sleep(10)
